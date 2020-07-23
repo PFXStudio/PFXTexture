@@ -15,7 +15,7 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func touchedStartButton(_ sender: Any) {
-        let controller = MainViewController()
+        let controller = ListViewController()
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: false, completion: nil)
     }

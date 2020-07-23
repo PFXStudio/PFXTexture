@@ -16,7 +16,7 @@
 		7E150C9224C94AF300510C80 /* PFXTextureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E150C9124C94AF300510C80 /* PFXTextureTests.swift */; };
 		7E150C9D24C94AF300510C80 /* PFXTextureUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E150C9C24C94AF300510C80 /* PFXTextureUITests.swift */; };
 		7E40921224C957690006549E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40921124C957690006549E /* MainViewController.swift */; };
-		7E40921424C96A2C0006549E /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40921324C96A2C0006549E /* ListView.swift */; };
+		7E40921424C96A2C0006549E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E40921324C96A2C0006549E /* ListViewController.swift */; };
 		C6FB845EAE7F53634CA7B749 /* Pods_PFXTexture.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BB879C4F872FDC5DEE955DA0 /* Pods_PFXTexture.framework */; };
 		CD2D6145EF6A86138000F3D4 /* Pods_PFXTexture_PFXTextureUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1038108CB7E246E950417F6F /* Pods_PFXTexture_PFXTextureUITests.framework */; };
 /* End PBXBuildFile section */
@@ -57,7 +57,7 @@
 		7E150C9C24C94AF300510C80 /* PFXTextureUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PFXTextureUITests.swift; sourceTree = "<group>"; };
 		7E150C9E24C94AF300510C80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7E40921124C957690006549E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		7E40921324C96A2C0006549E /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		7E40921324C96A2C0006549E /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		AD63C2DF3C8FB2C003D85D2F /* Pods-PFXTexture.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PFXTexture.debug.xcconfig"; path = "Target Support Files/Pods-PFXTexture/Pods-PFXTexture.debug.xcconfig"; sourceTree = "<group>"; };
 		AD9DE0FE383E23D1AB9A1082 /* Pods-PFXTexture-PFXTextureUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PFXTexture-PFXTextureUITests.debug.xcconfig"; path = "Target Support Files/Pods-PFXTexture-PFXTextureUITests/Pods-PFXTexture-PFXTextureUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AFB856F67456B1A26678BE3C /* Pods_PFXTextureTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PFXTextureTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -135,7 +135,7 @@
 				7E150C8324C94AF300510C80 /* Assets.xcassets */,
 				7E150C8524C94AF300510C80 /* LaunchScreen.storyboard */,
 				7E150C8824C94AF300510C80 /* Info.plist */,
-				7E40921324C96A2C0006549E /* ListView.swift */,
+				7E40921324C96A2C0006549E /* ListViewController.swift */,
 			);
 			path = PFXTexture;
 			sourceTree = "<group>";
@@ -410,7 +410,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E40921424C96A2C0006549E /* ListView.swift in Sources */,
+				7E40921424C96A2C0006549E /* ListViewController.swift in Sources */,
 				7E40921224C957690006549E /* MainViewController.swift in Sources */,
 				7E150C7F24C94AF100510C80 /* ViewController.swift in Sources */,
 				7E150C7B24C94AF100510C80 /* AppDelegate.swift in Sources */,

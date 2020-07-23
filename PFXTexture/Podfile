@@ -6,21 +6,18 @@ target 'PFXTexture' do
   use_frameworks!
   
     pod 'TextureSwiftSupport'
+    pod 'Texture'
     # RxSwift
     pod 'RealmSwift'
     pod 'RxSwift'
     pod 'RxCocoa'
     pod 'RxRealm'
 
-    pod 'RxDataSources'
     pod 'Action'
     pod 'RxSwiftExt'
     pod 'RxViewModel'
     pod 'RxGesture'
-    pod 'RxDataSources-Texture'
-    
-     # RxRealm
-    pod 'RxRealmDataSources'
+#    pod 'RxDataSources-Texture'
 
     # Network
     pod 'Moya/RxSwift'
