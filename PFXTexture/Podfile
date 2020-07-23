@@ -1,0 +1,55 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '13.0'
+
+target 'PFXTexture' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+  
+    pod 'TextureSwiftSupport'
+    # RxSwift
+    pod 'RealmSwift'
+    pod 'RxSwift'
+    pod 'RxCocoa'
+    pod 'RxRealm'
+
+    pod 'RxDataSources'
+    pod 'Action'
+    pod 'RxSwiftExt'
+    pod 'RxViewModel'
+    pod 'RxGesture'
+    pod 'RxDataSources-Texture'
+    
+     # RxRealm
+    pod 'RxRealmDataSources'
+
+    # Network
+    pod 'Moya/RxSwift'
+    pod 'Moya-ModelMapper'
+
+    # Image
+    pod 'Nuke'
+
+    # Transition
+    pod 'Hero'
+    
+    # Reusable
+    pod 'Reusable'
+    
+    # ProgressHud
+    pod 'JGProgressHUD'
+    
+    # Swift Lint
+    pod 'SwiftLint'
+
+  # Pods for PFXTexture
+
+  target 'PFXTextureTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'PFXTextureUITests' do
+    # Pods for testing
+  end
+
+end

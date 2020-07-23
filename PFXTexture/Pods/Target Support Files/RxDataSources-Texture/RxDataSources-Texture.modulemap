@@ -1,0 +1,6 @@
+framework module RxDataSources_Texture {
+  umbrella header "RxDataSources-Texture-umbrella.h"
+
+  export *
+  module * { export * }
+}
