@@ -113,7 +113,7 @@ extension RepositoryViewController: ASTableDelegate {
     }
     
     func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCellEditingStyle,
+                   commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {

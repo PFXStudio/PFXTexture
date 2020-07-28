@@ -4,20 +4,21 @@ platform :ios, '13.0'
 target 'PFXTexture' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
-  
-    pod 'Texture', '~> 3.0'
+
+    pod 'Texture', '3.0'
     pod 'TextureSwiftSupport'
     # RxSwift
     pod 'RealmSwift'
     pod 'RxSwift'
-    pod 'RxCocoa'
     pod 'RxRealm'
     pod 'RxAlamofire'
     pod 'RxDataSources'
+    pod 'RxCocoa-Texture', :git => 'https://github.com/PFXStudio/RxCocoa-Texture.git' 
 
     pod 'Action'
     pod 'RxSwiftExt'
-    pod 'RxViewModel'
+# RxViewModel에서 RxSwift 낮은 버전 디펜던시 하고 있음.
+#    pod 'RxViewModel'
     pod 'RxGesture'
 
     # Image
@@ -25,13 +26,13 @@ target 'PFXTexture' do
 
     # Transition
     pod 'Hero'
-    
+
     # Reusable
     pod 'Reusable'
-    
+
     # ProgressHud
     pod 'JGProgressHUD'
-    
+
     # Swift Lint
     pod 'SwiftLint'
 
