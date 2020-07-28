@@ -3,24 +3,9 @@ PODS:
     - RxCocoa (~> 4.0)
     - RxSwift (~> 4.0)
   - Alamofire (4.9.1)
+  - Differentiator (3.1.0)
   - Hero (1.5.0)
   - JGProgressHUD (2.1)
-  - ModelMapper (10.0.1):
-    - ModelMapper/Core (= 10.0.1)
-  - ModelMapper/Core (10.0.1)
-  - Moya (13.0.1):
-    - Moya/Core (= 13.0.1)
-  - Moya-ModelMapper (9.0.0):
-    - Moya-ModelMapper/Core (= 9.0.0)
-  - Moya-ModelMapper/Core (9.0.0):
-    - ModelMapper (~> 10.0)
-    - Moya (~> 13.0)
-  - Moya/Core (13.0.1):
-    - Alamofire (~> 4.1)
-    - Result (~> 4.1)
-  - Moya/RxSwift (13.0.1):
-    - Moya/Core
-    - RxSwift (~> 4.0)
   - Nuke (9.1.1)
   - PINCache (3.0.1-beta.8):
     - PINCache/Arc-exception-safe (= 3.0.1-beta.8)
@@ -42,14 +27,22 @@ PODS:
   - Realm/Headers (3.21.0)
   - RealmSwift (3.21.0):
     - Realm (= 3.21.0)
-  - Result (4.1.0)
   - Reusable (4.1.1):
     - Reusable/Storyboard (= 4.1.1)
     - Reusable/View (= 4.1.1)
   - Reusable/Storyboard (4.1.1)
   - Reusable/View (4.1.1)
+  - RxAlamofire (4.4.1):
+    - RxAlamofire/Core (= 4.4.1)
+  - RxAlamofire/Core (4.4.1):
+    - Alamofire (~> 4.8)
+    - RxSwift (~> 4.5)
   - RxCocoa (4.5.0):
     - RxSwift (>= 4.4.2, ~> 4.4)
+  - RxDataSources (3.1.0):
+    - Differentiator (~> 3.0)
+    - RxCocoa (~> 4.0)
+    - RxSwift (~> 4.0)
   - RxGesture (2.2.0):
     - RxCocoa (~> 4.5)
     - RxSwift (~> 4.5)
@@ -88,46 +81,45 @@ PODS:
     - Texture/Core
   - Texture/Video (3.0.0):
     - Texture/Core
-  - TextureSwiftSupport (2.0.0):
+  - TextureSwiftSupport (3.0.1):
     - Texture/Core (~> 3)
 
 DEPENDENCIES:
   - Action
   - Hero
   - JGProgressHUD
-  - Moya-ModelMapper
-  - Moya/RxSwift
   - Nuke
   - RealmSwift
   - Reusable
+  - RxAlamofire
   - RxCocoa
+  - RxDataSources
   - RxGesture
   - RxRealm
   - RxSwift
   - RxSwiftExt
   - RxViewModel
   - SwiftLint
-  - Texture
+  - Texture (~> 3.0)
   - TextureSwiftSupport
 
 SPEC REPOS:
   trunk:
     - Action
     - Alamofire
+    - Differentiator
     - Hero
     - JGProgressHUD
-    - ModelMapper
-    - Moya
-    - Moya-ModelMapper
     - Nuke
     - PINCache
     - PINOperation
     - PINRemoteImage
     - Realm
     - RealmSwift
-    - Result
     - Reusable
+    - RxAlamofire
     - RxCocoa
+    - RxDataSources
     - RxGesture
     - RxRealm
     - RxSwift
@@ -140,20 +132,19 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Action: 689181e4c3f6566844178d8a7da6fef39a9597fc
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   Hero: b7385b75e7259da62f4f85462f59a5082d66b058
   JGProgressHUD: aa403e9a5b45cae98903c4600cccdd98c0c3ec90
-  ModelMapper: 0f68dd4300d0e27290c70f66492c7f795da21bcf
-  Moya: f4a4b80ff2f8a4ffc208dfb31cd91636622fee6e
-  Moya-ModelMapper: 4948625af7fc5eef41ad9fdfe0c3517170b50960
   Nuke: af4301b154d3afd8a3b045a5194a9a773a00b7a8
   PINCache: 534fd41d358d828dfdf227a0d327f3673a65e20b
   PINOperation: 24b774353ca248fcf87d67b2d61eef42087c125a
   PINRemoteImage: e2b89e19fb6e77ffc099f9d9f3b3fe1745e3f9f9
   Realm: 38e9dcb19104b58407167d99f70d4995f7c16023
   RealmSwift: 3183cc1ad48378fbcd634311b22c0e6c44021152
-  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   Reusable: 53a9acf5c536f229b31b5865782414b508252ddb
+  RxAlamofire: ed65f451f5a9a59419b0b9e705043dc01410edd9
   RxCocoa: cbf70265dc65a981d4ac982e513c10cf23df24a0
+  RxDataSources: a843bad90c29817f5923ec8163f4af2de084ceb3
   RxGesture: c1b7bf17166b0ef9d642a9510f8bac5785f18990
   RxRealm: 5379eddd74f8d617ca7681d1f8d144af25b432b0
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
@@ -161,8 +152,8 @@ SPEC CHECKSUMS:
   RxViewModel: a50db3976409628887bad943825ab5f641275f0c
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
   Texture: 2f109e937850d94d1d07232041c9c7313ccddb81
-  TextureSwiftSupport: 0bd4158143ec6898cfcb24ab19cc578d3d59d9b1
+  TextureSwiftSupport: 942c828d13795e35b0fa6eb93a80e28409677f2e
 
-PODFILE CHECKSUM: 39f7599c72d74c2ff528f3397a02ca5b3b811354
+PODFILE CHECKSUM: c06ccf7329c7d4dfaa55c519a12c234c3afacece
 
 COCOAPODS: 1.9.1

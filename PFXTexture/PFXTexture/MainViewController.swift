@@ -23,7 +23,6 @@ class MainViewController: PlainDisplayNodeViewController {
     
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
       LayoutSpec {
-        
         ZStackLayout {
             topLabelNode
               .padding(UIEdgeInsets(top: 20, left: 20, bottom: .infinity, right: .infinity))

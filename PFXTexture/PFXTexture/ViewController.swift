@@ -15,7 +15,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func touchedStartButton(_ sender: Any) {
-        let controller = ListViewController()
+        let controller = RepositoryViewController()
+        controller.viewModel = RepositoryViewModel(dependency: RepositoryViewModel.Dependency())
         controller.modalPresentationStyle = .fullScreen
         self.present(controller, animated: false, completion: nil)
     }
