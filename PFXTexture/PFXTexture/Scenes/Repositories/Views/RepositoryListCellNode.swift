@@ -34,9 +34,9 @@ class RepositoryListCellNode: ASCellNode {
     lazy var descriptionNode = { () -> ASTextNode in
         let node = ASTextNode()
         node.placeholderColor = Attribute.placeHolderColor
-        node.maximumNumberOfLines = 0
-//        node.truncationAttributedText = NSAttributedString(string: " ...More",
-//                                                           attributes: Node.moreSeeAttributes)
+        node.maximumNumberOfLines = 1
+        node.truncationAttributedText = NSAttributedString(string: " ...More",
+                                                           attributes: Node.moreSeeAttributes)
         node.delegate = self
         node.isUserInteractionEnabled = true
         return node

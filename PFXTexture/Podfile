@@ -13,7 +13,10 @@ target 'PFXTexture' do
     pod 'RxRealm'
     pod 'RxAlamofire'
     pod 'RxDataSources'
-    pod 'RxCocoa-Texture', :git => 'https://github.com/PFXStudio/RxCocoa-Texture.git' 
+    #bind
+    pod 'RxCocoa-Texture', :git => 'https://github.com/PFXStudio/RxCocoa-Texture.git'
+    #tap
+    pod 'GTTexture-RxExtension', :git => 'https://github.com/PFXStudio/GTTexture-RxExtension.git'
 
     pod 'Action'
     pod 'RxSwiftExt'

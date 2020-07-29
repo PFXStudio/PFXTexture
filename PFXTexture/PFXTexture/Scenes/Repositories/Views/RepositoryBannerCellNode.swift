@@ -2,6 +2,7 @@ import Foundation
 import AsyncDisplayKit
 import RxSwift
 import RxCocoa
+import GTTexture_RxExtension
 
 class RepositoryBannerCellNode: ASCellNode {
     typealias Node = RepositoryBannerCellNode
@@ -96,19 +97,21 @@ extension RepositoryBannerCellNode {
         contentLayout.style.flexShrink = 1.0
         contentLayout.style.flexGrow = 1.0
         
+
         specs.append(contentLayout)
         for model in self.partnerModels {
             let partnerLayout = partnerLayoutSpec(model: model)
+            // TODO : 어떻게 해야 늘어나는 것이오..
             partnerLayout.style.flexShrink = 1.0
-            partnerLayout.style.flexGrow = 0.0
-            
+            partnerLayout.style.flexGrow = 1.0
+
             specs.append(partnerLayout)
         }
         
         let stackLayout = ASStackLayoutSpec(direction: .vertical,
                                             spacing: 10.0,
                                             justifyContent: .start,
-                                            alignItems: .baselineFirst,
+                                            alignItems: .stretch,
                                             children: specs)
         return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 10.0,
                                                       left: 10.0,
@@ -145,21 +148,28 @@ extension RepositoryBannerCellNode {
         regionNode.attributedText = NSAttributedString(string: model.region, attributes: Self.descAttributes)
         
         let nameNode = ASTextNode()
-        nameNode.maximumNumberOfLines = 0
+        nameNode.maximumNumberOfLines = 1
         nameNode.placeholderColor = Attribute.placeHolderColor
         nameNode.attributedText = NSAttributedString(string: model.name, attributes: Self.descAttributes)
-        
+        nameNode.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                guard let _ = self else { return }
+                nameNode.maximumNumberOfLines = nameNode.maximumNumberOfLines == 0 ? 1 : 0
+                nameNode.layoutIfNeeded()
+            })
+            .disposed(by: self.disposeBag)
+
         let infoLayout = ASStackLayoutSpec(direction: .vertical,
                                             spacing: 10.0,
                                             justifyContent: .start,
-                                            alignItems: .baselineFirst,
+                                            alignItems: .stretch,
                                             children: [regionNode,
                                                        nameNode])
 
         let stackLayout = ASStackLayoutSpec(direction: .horizontal,
                                             spacing: 10.0,
                                             justifyContent: .start,
-                                            alignItems: .baselineFirst,
+                                            alignItems: .stretch,
                                             children: [node,
                                                        infoLayout
                                                        ])

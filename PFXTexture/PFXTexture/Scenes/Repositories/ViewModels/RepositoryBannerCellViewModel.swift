@@ -18,9 +18,9 @@ class RepositoryBannerCellViewModel: RxCellViewModel, RxViewModelProtocol {
         var title = "섹션 타이틀 제목"
         var desc = "원하는 아이템을 선택 해 보세요!"
         var partnerModels = [
-            PartnerModel(region: "아아아아아아아", name: String.random(), star: "4.5", commentCount: "444", thumbnailUrl: URL(string: "http://d2tksqsghodazb.cloudfront.net/profile/201607/20160706/48c425a3-d6fa-4ae8-8b80-8ad24efaa361.PNG")!),
-            PartnerModel(region: "캬캬캬캬챷퍄캬캬챠", name: String.random(), star: "4.5", commentCount: "444", thumbnailUrl: URL(string: "http://d2tksqsghodazb.cloudfront.net/profile/201607/20160706/48c425a3-d6fa-4ae8-8b80-8ad24efaa361.PNG")!),
-            PartnerModel(region: "애내채타파얃93야패", name: String.random(), star: "4.5", commentCount: "444", thumbnailUrl: URL(string: "http://d2tksqsghodazb.cloudfront.net/profile/201607/20160706/48c425a3-d6fa-4ae8-8b80-8ad24efaa361.PNG")!)
+            PartnerModel(region: "아아아아아아아", name: String.random(length: 128), star: "4.5", commentCount: "444", thumbnailUrl: URL(string: "http://d2tksqsghodazb.cloudfront.net/profile/201607/20160706/48c425a3-d6fa-4ae8-8b80-8ad24efaa361.PNG")!),
+            PartnerModel(region: "캬캬캬캬챷퍄캬캬챠", name: String.random(length: 256), star: "4.5", commentCount: "444", thumbnailUrl: URL(string: "http://d2tksqsghodazb.cloudfront.net/profile/201607/20160706/48c425a3-d6fa-4ae8-8b80-8ad24efaa361.PNG")!),
+            PartnerModel(region: "애내채타파얃93야패", name: String.random(length: 512), star: "4.5", commentCount: "444", thumbnailUrl: URL(string: "http://d2tksqsghodazb.cloudfront.net/profile/201607/20160706/48c425a3-d6fa-4ae8-8b80-8ad24efaa361.PNG")!)
         ]
     }
     var input: RepositoryBannerCellViewModel.Input!
