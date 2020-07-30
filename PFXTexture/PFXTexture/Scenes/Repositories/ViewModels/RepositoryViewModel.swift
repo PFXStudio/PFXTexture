@@ -54,6 +54,11 @@ class RepositoryViewModel: RxViewModel, RxViewModelProtocol {
                             if i == 0 { continue }
                             viewModels.insert(RepositoryBannerCellViewModel(reuseIdentifier: "RepositoryBannerCell", identifier: "RepositoryBannerCell" + String.random(), dependency: RepositoryBannerCellViewModel.Dependency()), at: i)
                         }
+                        
+                        for i in stride(from: 0, to: viewModels.count, by: 10) {
+                            if i == 0 { continue }
+                            viewModels.insert(RepositoryInfoCellViewModel(reuseIdentifier: "RepositoryInfoCell", identifier: "RepositoryInfoCell" + String.random(), dependency: RepositoryInfoCellViewModel.Dependency()), at: i)
+                        }
 
                         if var cellViewModels = self.cellViewModelsSubject.value {
                             cellViewModels.append(contentsOf: viewModels)

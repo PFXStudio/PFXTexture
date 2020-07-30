@@ -25,25 +25,25 @@ class RepositoryBannerCellNode: ASCellNode {
         let node = ASTextNode()
         node.placeholderColor = Attribute.placeHolderColor
         node.maximumNumberOfLines = 1
-//        node.truncationAttributedText = NSAttributedString(string: " ...More",
-//                                                           attributes: Node.moreSeeAttributes)
+        //        node.truncationAttributedText = NSAttributedString(string: " ...More",
+        //                                                           attributes: Node.moreSeeAttributes)
         node.delegate = self
         node.isUserInteractionEnabled = true
         return node
     }()
-
+    
     lazy var nameNode = { () -> ASTextNode in
         let node = ASTextNode()
         node.placeholderColor = Attribute.placeHolderColor
         node.maximumNumberOfLines = 1
-//        node.truncationAttributedText = NSAttributedString(string: " ...More",
-//                                                           attributes: Node.moreSeeAttributes)
+        //        node.truncationAttributedText = NSAttributedString(string: " ...More",
+        //                                                           attributes: Node.moreSeeAttributes)
         node.delegate = self
         node.isUserInteractionEnabled = true
         return node
     }()
-
-
+    
+    
     let disposeBag = DisposeBag()
     
     init(viewModel: RepositoryBannerCellViewModel) {
@@ -52,7 +52,7 @@ class RepositoryBannerCellNode: ASCellNode {
         self.selectionStyle = .none
         self.backgroundColor = .white
         self.automaticallyManagesSubnodes = true
-
+        
         // drive로 하면 안 됨. 백그라운드 쓰레드에서 처리 하게끔 되어 있나 봄
         self.viewModel.output.title
             .subscribe(onNext: { [weak self] title in
@@ -76,9 +76,9 @@ class RepositoryBannerCellNode: ASCellNode {
         
         self.viewModel.input.willDisplay.onNext(true)
         
-//        userProfileNode.rx
-//            .tap(to: viewModel.input.tapProfile)
-//            .disposed(by: disposeBag)
+        //        userProfileNode.rx
+        //            .tap(to: viewModel.input.tapProfile)
+        //            .disposed(by: disposeBag)
     }
 }
 
@@ -97,14 +97,9 @@ extension RepositoryBannerCellNode {
         contentLayout.style.flexShrink = 1.0
         contentLayout.style.flexGrow = 1.0
         
-
         specs.append(contentLayout)
         for model in self.partnerModels {
             let partnerLayout = partnerLayoutSpec(model: model)
-            // TODO : 어떻게 해야 늘어나는 것이오..
-            partnerLayout.style.flexShrink = 1.0
-            partnerLayout.style.flexGrow = 1.0
-
             specs.append(partnerLayout)
         }
         
@@ -123,14 +118,14 @@ extension RepositoryBannerCellNode {
     private func contentLayoutSpec() -> ASLayoutSpec {
         let elements = [self.titleNode,
                         self.descriptionNode
-                        ].filter { $0.attributedText?.length ?? 0 > 0 }
+            ].filter { $0.attributedText?.length ?? 0 > 0 }
         return ASStackLayoutSpec(direction: .vertical,
                                  spacing: 5.0,
                                  justifyContent: .start,
                                  alignItems: .stretch,
                                  children: elements)
     }
-
+    
     private func partnerLayoutSpec(model: PartnerModel) -> ASLayoutSpec {
         let node = ASNetworkImageNode()
         node.style.preferredSize = CGSize(width: 50.0, height: 50.0)
@@ -140,7 +135,6 @@ extension RepositoryBannerCellNode {
         node.borderColor = UIColor.gray.withAlphaComponent(0.5).cgColor
         node.borderWidth = 0.5
         node.url = model.thumbnailUrl
-        node.layoutIfNeeded()
         
         let regionNode = ASTextNode()
         regionNode.maximumNumberOfLines = 1
@@ -155,24 +149,24 @@ extension RepositoryBannerCellNode {
             .subscribe(onNext: { [weak self] _ in
                 guard let _ = self else { return }
                 nameNode.maximumNumberOfLines = nameNode.maximumNumberOfLines == 0 ? 1 : 0
-                nameNode.layoutIfNeeded()
+                nameNode.setNeedsLayout()
             })
             .disposed(by: self.disposeBag)
-
+        
         let infoLayout = ASStackLayoutSpec(direction: .vertical,
-                                            spacing: 10.0,
-                                            justifyContent: .start,
-                                            alignItems: .stretch,
-                                            children: [regionNode,
-                                                       nameNode])
-
+                                           spacing: 10.0,
+                                           justifyContent: .start,
+                                           alignItems: .stretch,
+                                           children: [regionNode,
+                                                      nameNode])
+        
         let stackLayout = ASStackLayoutSpec(direction: .horizontal,
                                             spacing: 10.0,
                                             justifyContent: .start,
                                             alignItems: .stretch,
                                             children: [node,
                                                        infoLayout
-                                                       ])
+        ])
         
         return ASInsetLayoutSpec(insets: UIEdgeInsets(top: 10.0,
                                                       left: 10.0,

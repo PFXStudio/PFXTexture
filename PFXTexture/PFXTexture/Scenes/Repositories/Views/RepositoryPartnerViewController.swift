@@ -3,7 +3,7 @@ import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 
-class RepositoryViewController: ASDKViewController<ASTableNode> {
+class RepositoryPartnerViewController: ASDKViewController<ASTableNode> {
     private var items: [RxCellViewModel] = []
     private var context: ASBatchContext?
     var viewModel: RepositoryViewModel!
@@ -49,7 +49,7 @@ class RepositoryViewController: ASDKViewController<ASTableNode> {
     }
 }
 
-extension RepositoryViewController: ASTableDataSource {
+extension RepositoryPartnerViewController: ASTableDataSource {
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         return 1
     }
@@ -106,7 +106,7 @@ extension RepositoryViewController: ASTableDataSource {
     }
 }
 
-extension RepositoryViewController: ASTableDelegate {
+extension RepositoryPartnerViewController: ASTableDelegate {
     // block ASBatchContext active state
     func shouldBatchFetch(for tableNode: ASTableNode) -> Bool {
         return self.context == nil
@@ -136,7 +136,7 @@ extension RepositoryViewController: ASTableDelegate {
     }
 }
 
-extension RepositoryViewController {
+extension RepositoryPartnerViewController {
     func openUserProfile(id: Int) {
         //        guard let index = self.items.index(where: { $0.id == id }) else { return }
         //        let viewModel = self.items[index]

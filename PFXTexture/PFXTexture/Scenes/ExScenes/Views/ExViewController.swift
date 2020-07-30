@@ -3,10 +3,13 @@ import AsyncDisplayKit
 import RxSwift
 import RxCocoa
 
-class RepositoryViewController: ASDKViewController<ASTableNode> {
-    private var items: [RxCellViewModel] = []
+class ExViewController: ASDKViewController<ASTableNode> {
+    private var items: [ExData] = [
+        ExData(title: "1111", desc: "1212"),
+        ExData(title: "2222", desc: "22333"),
+        ExData(title: "3333", desc: "3323"),
+    ]
     private var context: ASBatchContext?
-    var viewModel: RepositoryViewModel!
     
     private let disposeBag = DisposeBag()
     
@@ -32,16 +35,6 @@ class RepositoryViewController: ASDKViewController<ASTableNode> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel.input.load.onNext(())
-        
-        self.viewModel.output.cellViewModels
-            .asDriver(onErrorJustReturn: [RepositoryCellViewModel]())
-            .drive(onNext: { [weak self] viewModels in
-                guard let self = self, let viewModels = viewModels else { return }
-                self.items.append(contentsOf: viewModels)
-                self.node.reloadData()
-            })
-            .disposed(by: self.disposeBag)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,7 +42,7 @@ class RepositoryViewController: ASDKViewController<ASTableNode> {
     }
 }
 
-extension RepositoryViewController: ASTableDataSource {
+extension ExViewController: ASTableDataSource {
     func numberOfSections(in tableNode: ASTableNode) -> Int {
         return 1
     }
@@ -67,46 +60,19 @@ extension RepositoryViewController: ASTableDataSource {
     func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
         return {
             guard self.items.count > indexPath.row else { return ASCellNode() }
-            if let viewModel = self.items[indexPath.row] as? RepositoryCellViewModel {
-                let cellNode = RepositoryListCellNode(viewModel: viewModel)
-                
-                return cellNode
-            }
-            if let viewModel = self.items[indexPath.row] as? RepositoryBannerCellViewModel {
-                let cellNode = RepositoryBannerCellNode(viewModel: viewModel)
-                
-                return cellNode
-            }
-            
-            if let viewModel = self.items[indexPath.row] as? RepositoryInfoCellViewModel {
-                let cellNode = RepositoryInfoCellNode(with: viewModel.dependency.contents.first!)
-                
-                return cellNode
-            }
-            
-            return ASCellNode()
+            let data = self.items[indexPath.row]
+            return ExCellNode(data: data)
         }
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
         guard self.items.count > indexPath.row else { return ASCellNode() }
-        if let viewModel = self.items[indexPath.row] as? RepositoryCellViewModel {
-            return RepositoryListCellNode(viewModel: viewModel)
-        }
-        if let viewModel = self.items[indexPath.row] as? RepositoryBannerCellViewModel {
-            return RepositoryBannerCellNode(viewModel: viewModel)
-        }
-
-        if let viewModel = self.items[indexPath.row] as? RepositoryInfoCellViewModel {
-            return RepositoryInfoCellNode(with: viewModel.dependency.contents.first!)
-        }
-        
-
-        return ASCellNode()
+        let data = self.items[indexPath.row]
+        return ExCellNode(data: data)
     }
 }
 
-extension RepositoryViewController: ASTableDelegate {
+extension ExViewController: ASTableDelegate {
     // block ASBatchContext active state
     func shouldBatchFetch(for tableNode: ASTableNode) -> Bool {
         return self.context == nil
@@ -115,7 +81,6 @@ extension RepositoryViewController: ASTableDelegate {
     // load more
     func tableNode(_ tableNode: ASTableNode, willBeginBatchFetchWith context: ASBatchContext) {
         self.context = context
-        self.viewModel.input.load.onNext(())
     }
     
     // editable cell
@@ -136,7 +101,7 @@ extension RepositoryViewController: ASTableDelegate {
     }
 }
 
-extension RepositoryViewController {
+extension ExViewController {
     func openUserProfile(id: Int) {
         //        guard let index = self.items.index(where: { $0.id == id }) else { return }
         //        let viewModel = self.items[index]

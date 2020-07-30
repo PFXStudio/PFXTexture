@@ -6,4 +6,5 @@ struct PartnerModel {
     var star: String
     var commentCount: String
     var thumbnailUrl: URL
+    var maxLine = 1
 }
