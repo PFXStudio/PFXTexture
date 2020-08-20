@@ -1,11 +1,3 @@
-//
-//  String+Extentions.swift
-//  WeddingBell
-//
-//  Created by jinwoo.park on 2020/04/22.
-//  Copyright © 2020 How To Marry. All rights reserved.
-//
-
 import Foundation
 
 extension String {

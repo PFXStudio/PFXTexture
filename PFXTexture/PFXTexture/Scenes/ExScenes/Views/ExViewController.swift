@@ -4,10 +4,14 @@ import RxSwift
 import RxCocoa
 
 class ExViewController: ASDKViewController<ASTableNode> {
-    private var items: [ExData] = [
+    private var firstItems: [ExData] = [
         ExData(title: "1111", desc: "1212"),
         ExData(title: "2222", desc: "22333"),
         ExData(title: "3333", desc: "3323"),
+    ]
+    private var secondItems: [DContentData] = [
+        DContentData(),
+        DContentData(),
     ]
     private var context: ASBatchContext?
     
@@ -44,11 +48,15 @@ class ExViewController: ASDKViewController<ASTableNode> {
 
 extension ExViewController: ASTableDataSource {
     func numberOfSections(in tableNode: ASTableNode) -> Int {
-        return 1
+        return 2
     }
     
     func tableNode(_ tableNode: ASTableNode, numberOfRowsInSection section: Int) -> Int {
-        return self.items.count
+        if section == 0 {
+            return self.firstItems.count
+        }
+        
+        return self.secondItems.count
     }
     
     /*
@@ -59,16 +67,24 @@ extension ExViewController: ASTableDataSource {
      */
     func tableNode(_ tableNode: ASTableNode, nodeBlockForRowAt indexPath: IndexPath) -> ASCellNodeBlock {
         return {
-            guard self.items.count > indexPath.row else { return ASCellNode() }
-            let data = self.items[indexPath.row]
-            return ExCellNode(data: data)
+            if indexPath.section == 0 {
+                let data = self.firstItems[indexPath.row]
+                return ExCellNode(data: data)
+            }
+            
+            let data = self.secondItems[indexPath.row]
+            return DContentCellNode(data: data)
         }
     }
     
     func tableNode(_ tableNode: ASTableNode, nodeForRowAt indexPath: IndexPath) -> ASCellNode {
-        guard self.items.count > indexPath.row else { return ASCellNode() }
-        let data = self.items[indexPath.row]
-        return ExCellNode(data: data)
+        if indexPath.section == 0 {
+            let data = self.firstItems[indexPath.row]
+            return ExCellNode(data: data)
+        }
+        
+        let data = self.secondItems[indexPath.row]
+        return DContentCellNode(data: data)
     }
 }
 
@@ -94,7 +110,13 @@ extension ExViewController: ASTableDelegate {
         
         if editingStyle == .delete {
             self.node.performBatchUpdates({
-                self.items.remove(at: indexPath.row)
+                if indexPath.section == 0 {
+                    self.firstItems.remove(at: indexPath.row)
+                }
+                else {
+                    self.secondItems.remove(at: indexPath.row)
+                }
+
                 self.node.deleteRows(at: [indexPath], with: .fade)
             }, completion: nil)
         }
