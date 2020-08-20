@@ -10,6 +10,7 @@
 		13464AEC82B74086FBB3B635 /* Pods_PFXTextureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB856F67456B1A26678BE3C /* Pods_PFXTextureTests.framework */; };
 		6D4E02E224EE990100BFB2F2 /* DContentCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E02E124EE990100BFB2F2 /* DContentCellNode.swift */; };
 		6D4E02E424EE9A1700BFB2F2 /* DTitleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E02E324EE9A1700BFB2F2 /* DTitleNode.swift */; };
+		6D4E02E624EEAB9300BFB2F2 /* DViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E02E524EEAB9300BFB2F2 /* DViewController.swift */; };
 		7E150C7B24C94AF100510C80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E150C7A24C94AF100510C80 /* AppDelegate.swift */; };
 		7E150C7F24C94AF100510C80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E150C7E24C94AF100510C80 /* ViewController.swift */; };
 		7E150C8224C94AF100510C80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E150C8024C94AF100510C80 /* Main.storyboard */; };
@@ -72,6 +73,7 @@
 		6253FFB6E72C6E63CAE7BF8F /* Pods-PFXTexture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PFXTexture.release.xcconfig"; path = "Target Support Files/Pods-PFXTexture/Pods-PFXTexture.release.xcconfig"; sourceTree = "<group>"; };
 		6D4E02E124EE990100BFB2F2 /* DContentCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DContentCellNode.swift; sourceTree = "<group>"; };
 		6D4E02E324EE9A1700BFB2F2 /* DTitleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTitleNode.swift; sourceTree = "<group>"; };
+		6D4E02E524EEAB9300BFB2F2 /* DViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DViewController.swift; sourceTree = "<group>"; };
 		71AEC78133C3FE23329466D6 /* Pods-PFXTexture-PFXTextureUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PFXTexture-PFXTextureUITests.release.xcconfig"; path = "Target Support Files/Pods-PFXTexture-PFXTextureUITests/Pods-PFXTexture-PFXTextureUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7E150C7724C94AF100510C80 /* PFXTexture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PFXTexture.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E150C7A24C94AF100510C80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			children = (
 				6D4E02E124EE990100BFB2F2 /* DContentCellNode.swift */,
 				6D4E02E324EE9A1700BFB2F2 /* DTitleNode.swift */,
+				6D4E02E524EEAB9300BFB2F2 /* DViewController.swift */,
 			);
 			path = DynamicScenes;
 			sourceTree = "<group>";
@@ -589,6 +592,7 @@
 				7E76D1DB24CFBE9F00F4D7E3 /* RepositoryModel.swift in Sources */,
 				7E473EA524CFFD8000F8637E /* RepositoryBannerCellViewModel.swift in Sources */,
 				7E9A2CA324D25C3300AA8A4B /* RepositoryInfoCellNode.swift in Sources */,
+				6D4E02E624EEAB9300BFB2F2 /* DViewController.swift in Sources */,
 				7E76D1EA24CFC87600F4D7E3 /* RxCellViewModel.swift in Sources */,
 				7E9A2CA524D25D0700AA8A4B /* RepositoryInfoCellViewModel.swift in Sources */,
 				7E76D1F324CFCB9500F4D7E3 /* String+Extentions.swift in Sources */,
