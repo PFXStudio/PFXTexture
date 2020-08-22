@@ -5,7 +5,7 @@ extension DViewController {
     class DLayout: UICollectionViewFlowLayout {
         override init() {
             super.init()
-//            self.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+            //            self.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
             self.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
             
             self.sectionHeadersPinToVisibleBounds = true
@@ -44,19 +44,31 @@ class DViewController: ASDKViewController<ASCollectionNode>, ASCollectionDataSou
         
         return node
     }
-
+    
+    private var stickyHeaderNode: DStickyHeaderNode!
     private lazy var sections = { () -> [[ASCellNode]] in
         var results = [[ASCellNode]]()
         var nodes = [ASCellNode]()
-        var node: ASCellNode = ExCellNode(data: ExData(title: "1111", desc: "1212"))
-        node.backgroundColor = UIColor.red
+        // section 0
+        var node: ASCellNode = ExCellNode(data: ExData(title: "인포메이션 셀입니다.", desc: "다이나믹 셀\n클릭 해 보세요! 🤩"))
+        node.backgroundColor = UIColor.orange
         nodes.append(node)
         results.append(nodes)
         
+        self.stickyHeaderNode = DStickyHeaderNode(with: DStickyHeaderNode.Content(items: ["AA_A", "B_BB_B_BB", "C__C_C", "DD_D_D_D___DD", "E____E", "FF_F_F_F", "G_G_G_G"], selectedIndex: 0))
+        self.stickyHeaderNode.selectedMenu = { [weak self] type in
+            guard let self = self else { return }
+            print(type)
+            self.collectionNode.reloadData()
+        }
+        // section 1
         nodes = [ASCellNode]()
-        // news
-        node = DContentCellNode(data: DContentData())
+        node = ExCellNode(data: ExData(title: "인포메이션 셀입니다.", desc: "스티키 메뉴 영역이에용! 🥳"))
+        node.isUserInteractionEnabled = false
         node.backgroundColor = UIColor.cyan
+        nodes.append(node)
+        
+        node = DCellNode(data: DCellData())
         nodes.append(node)
         results.append(nodes)
         return results
@@ -70,34 +82,43 @@ class DViewController: ASDKViewController<ASCollectionNode>, ASCollectionDataSou
         fatalError("init(coder:) has not been implemented")
     }
     
-//    init(coordinator: HomeCoordinator) {
-//        self.coordinator = coordinator
-//        super.init(node: ASCollectionNode(collectionViewLayout: DLayout()))
-//    }
+    //    init(coordinator: HomeCoordinator) {
+    //        self.coordinator = coordinator
+    //        super.init(node: ASCollectionNode(collectionViewLayout: DLayout()))
+    //    }
     
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-//
+    //    required init?(coder: NSCoder) {
+    //        fatalError("init(coder:) has not been implemented")
+    //    }
+    //
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.collectionNode.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLoad()
         if #available(iOS 13.0, *) {
-            let statusBar = UIView(frame: UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+            let sharedApplication = UIApplication.shared
+            let statusBar = UIView(frame: (sharedApplication.delegate?.window??.windowScene?.statusBarManager?.statusBarFrame)!)
             statusBar.backgroundColor = UIColor.white
-            UIApplication.shared.keyWindow?.addSubview(statusBar)
+            sharedApplication.delegate?.window??.addSubview(statusBar)
+            
+            //            let statusBar = UIView(frame: UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
+            //            statusBar.backgroundColor = UIColor.white
+            //            UIApplication.shared.keyWindow?.addSubview(statusBar)
         }
         else {
             let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
             statusBar?.backgroundColor = UIColor.white
         }
-
-        self.collectionNode.reloadData()
+        
     }
     
-//    override func viewDidDisappear(_ animated: Bool) {
-//        super.viewDidDisappear(animated)
-//        coordinator?.removeDependency(coordinator)
-//    }
+    //    override func viewDidDisappear(_ animated: Bool) {
+    //        super.viewDidDisappear(animated)
+    //        coordinator?.removeDependency(coordinator)
+    //    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.sections.count
@@ -118,6 +139,10 @@ class DViewController: ASDKViewController<ASCollectionNode>, ASCollectionDataSou
             return ASCellNode()
         }
         
+        if self.stickyHeaderNode != nil {
+            return self.stickyHeaderNode
+        }
+        
         return ASCellNode()
     }
     
@@ -127,7 +152,7 @@ class DViewController: ASDKViewController<ASCollectionNode>, ASCollectionDataSou
     
     func collectionNode(_ collectionNode: ASCollectionNode, constrainedSizeForItemAt indexPath: IndexPath) -> ASSizeRange {
         if indexPath.section == 0 {
-            return ASSizeRangeMake(CGSize(width: collectionNode.bounds.width, height: 44))
+            return ASSizeRangeUnconstrained
         }
         return ASSizeRangeUnconstrained
     }

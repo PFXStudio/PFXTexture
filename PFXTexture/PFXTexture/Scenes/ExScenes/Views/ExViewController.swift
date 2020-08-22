@@ -9,9 +9,8 @@ class ExViewController: ASDKViewController<ASTableNode> {
         ExData(title: "2222", desc: "22333"),
         ExData(title: "3333", desc: "3323"),
     ]
-    private var secondItems: [DContentData] = [
-        DContentData(),
-        DContentData(),
+    private var secondItems = [
+        DCellData()
     ]
     private var context: ASBatchContext?
     
@@ -73,7 +72,7 @@ extension ExViewController: ASTableDataSource {
             }
             
             let data = self.secondItems[indexPath.row]
-            return DContentCellNode(data: data)
+            return DCellNode(data: data)
         }
     }
     
@@ -84,7 +83,7 @@ extension ExViewController: ASTableDataSource {
         }
         
         let data = self.secondItems[indexPath.row]
-        return DContentCellNode(data: data)
+        return DCellNode(data: data)
     }
 }
 

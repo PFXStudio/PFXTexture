@@ -2,7 +2,32 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class RepoService {
+enum GithubParam {
+    case since(Int?)
+    
+    var key: String {
+        switch self {
+        case .since: return "since"
+        }
+    }
+    
+    var value: Any? {
+        switch self {
+        case .since(let value): return value
+        }
+    }
+}
+
+protocol GithubProtocol {
+    func loadRepository(params: [GithubParam]?) -> Single<[RepositoryModel]>
+}
+
+class GithubService: GithubProtocol {
+    func loadRepository(params: [GithubParam]?) -> Single<[RepositoryModel]> {
+        return Network.shared.get(url: Route.basePath.path,
+                                  params: Route.parameters(params)).generateArrayModel()
+    }
+    
     enum Route {
         case basePath
         
@@ -13,24 +38,7 @@ class RepoService {
             case .basePath: return base
             }
         }
-        
-        enum Params {
-            case since(Int?)
-            
-            var key: String {
-                switch self {
-                case .since: return "since"
-                }
-            }
-            
-            var value: Any? {
-                switch self {
-                case .since(let value): return value
-                }
-            }
-        }
-        
-        static func parameters(_ params: [Params]?) -> [String: Any]? {
+        static func parameters(_ params: [GithubParam]?) -> [String: Any]? {
             guard let `params` = params else { return nil }
             var result: [String: Any] = [:]
             
@@ -40,13 +48,5 @@ class RepoService {
             
             return result.isEmpty ? nil: result
         }
-    }
-}
-
-extension RepoService {
-    static func loadRepository(params: [RepoService.Route.Params]?) -> Single<[RepositoryModel]> {
-        return Network.shared.get(url: Route.basePath.path,
-                                  params: Route.parameters(params))
-            .generateArrayModel()
     }
 }

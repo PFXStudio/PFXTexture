@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		13464AEC82B74086FBB3B635 /* Pods_PFXTextureTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AFB856F67456B1A26678BE3C /* Pods_PFXTextureTests.framework */; };
-		6D4E02E224EE990100BFB2F2 /* DContentCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E02E124EE990100BFB2F2 /* DContentCellNode.swift */; };
-		6D4E02E424EE9A1700BFB2F2 /* DTitleNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E02E324EE9A1700BFB2F2 /* DTitleNode.swift */; };
+		6D1017BF24F0BAD1006D380B /* DContentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1017BE24F0BAD1006D380B /* DContentsViewModel.swift */; };
+		6D1017C124F0C0B1006D380B /* DStickyHeaderNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1017C024F0C0B1006D380B /* DStickyHeaderNode.swift */; };
+		6D1017C324F0C170006D380B /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D1017C224F0C170006D380B /* UIView+Extension.swift */; };
+		6D4E02E224EE990100BFB2F2 /* DCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E02E124EE990100BFB2F2 /* DCellNode.swift */; };
+		6D4E02E424EE9A1700BFB2F2 /* DContentsNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E02E324EE9A1700BFB2F2 /* DContentsNode.swift */; };
 		6D4E02E624EEAB9300BFB2F2 /* DViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4E02E524EEAB9300BFB2F2 /* DViewController.swift */; };
 		7E150C7B24C94AF100510C80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E150C7A24C94AF100510C80 /* AppDelegate.swift */; };
 		7E150C7F24C94AF100510C80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E150C7E24C94AF100510C80 /* ViewController.swift */; };
@@ -29,7 +32,7 @@
 		7E76D1D724CFBE5E00F4D7E3 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E76D1D524CFBE5E00F4D7E3 /* Network.swift */; };
 		7E76D1DA24CFBE9F00F4D7E3 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E76D1D824CFBE9F00F4D7E3 /* UserModel.swift */; };
 		7E76D1DB24CFBE9F00F4D7E3 /* RepositoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E76D1D924CFBE9F00F4D7E3 /* RepositoryModel.swift */; };
-		7E76D1DE24CFBF5D00F4D7E3 /* Decoder+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E76D1DD24CFBF5D00F4D7E3 /* Decoder+extension.swift */; };
+		7E76D1DE24CFBF5D00F4D7E3 /* Decoder+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E76D1DD24CFBF5D00F4D7E3 /* Decoder+Extension.swift */; };
 		7E76D1E024CFBFD300F4D7E3 /* RepositoryListCellNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E76D1DF24CFBFD300F4D7E3 /* RepositoryListCellNode.swift */; };
 		7E76D1E924CFC87600F4D7E3 /* RxViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E76D1E224CFC87600F4D7E3 /* RxViewController.swift */; };
 		7E76D1EA24CFC87600F4D7E3 /* RxCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E76D1E324CFC87600F4D7E3 /* RxCellViewModel.swift */; };
@@ -71,8 +74,11 @@
 		1038108CB7E246E950417F6F /* Pods_PFXTexture_PFXTextureUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PFXTexture_PFXTextureUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E4BAD1EF229DBD65830BDC3 /* Pods-PFXTextureTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PFXTextureTests.debug.xcconfig"; path = "Target Support Files/Pods-PFXTextureTests/Pods-PFXTextureTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6253FFB6E72C6E63CAE7BF8F /* Pods-PFXTexture.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PFXTexture.release.xcconfig"; path = "Target Support Files/Pods-PFXTexture/Pods-PFXTexture.release.xcconfig"; sourceTree = "<group>"; };
-		6D4E02E124EE990100BFB2F2 /* DContentCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DContentCellNode.swift; sourceTree = "<group>"; };
-		6D4E02E324EE9A1700BFB2F2 /* DTitleNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTitleNode.swift; sourceTree = "<group>"; };
+		6D1017BE24F0BAD1006D380B /* DContentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DContentsViewModel.swift; sourceTree = "<group>"; };
+		6D1017C024F0C0B1006D380B /* DStickyHeaderNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DStickyHeaderNode.swift; sourceTree = "<group>"; };
+		6D1017C224F0C170006D380B /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		6D4E02E124EE990100BFB2F2 /* DCellNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCellNode.swift; sourceTree = "<group>"; };
+		6D4E02E324EE9A1700BFB2F2 /* DContentsNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DContentsNode.swift; sourceTree = "<group>"; };
 		6D4E02E524EEAB9300BFB2F2 /* DViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DViewController.swift; sourceTree = "<group>"; };
 		71AEC78133C3FE23329466D6 /* Pods-PFXTexture-PFXTextureUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PFXTexture-PFXTextureUITests.release.xcconfig"; path = "Target Support Files/Pods-PFXTexture-PFXTextureUITests/Pods-PFXTexture-PFXTextureUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7E150C7724C94AF100510C80 /* PFXTexture.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PFXTexture.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,7 +105,7 @@
 		7E76D1D524CFBE5E00F4D7E3 /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		7E76D1D824CFBE9F00F4D7E3 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		7E76D1D924CFBE9F00F4D7E3 /* RepositoryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryModel.swift; sourceTree = "<group>"; };
-		7E76D1DD24CFBF5D00F4D7E3 /* Decoder+extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+extension.swift"; sourceTree = "<group>"; };
+		7E76D1DD24CFBF5D00F4D7E3 /* Decoder+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Decoder+Extension.swift"; sourceTree = "<group>"; };
 		7E76D1DF24CFBFD300F4D7E3 /* RepositoryListCellNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryListCellNode.swift; sourceTree = "<group>"; };
 		7E76D1E224CFC87600F4D7E3 /* RxViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxViewController.swift; sourceTree = "<group>"; };
 		7E76D1E324CFC87600F4D7E3 /* RxCellViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RxCellViewModel.swift; sourceTree = "<group>"; };
@@ -164,8 +170,10 @@
 		6D4E02E024EE98E900BFB2F2 /* DynamicScenes */ = {
 			isa = PBXGroup;
 			children = (
-				6D4E02E124EE990100BFB2F2 /* DContentCellNode.swift */,
-				6D4E02E324EE9A1700BFB2F2 /* DTitleNode.swift */,
+				6D4E02E124EE990100BFB2F2 /* DCellNode.swift */,
+				6D4E02E324EE9A1700BFB2F2 /* DContentsNode.swift */,
+				6D1017BE24F0BAD1006D380B /* DContentsViewModel.swift */,
+				6D1017C024F0C0B1006D380B /* DStickyHeaderNode.swift */,
 				6D4E02E524EEAB9300BFB2F2 /* DViewController.swift */,
 			);
 			path = DynamicScenes;
@@ -296,8 +304,9 @@
 		7E76D1DC24CFBF5D00F4D7E3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				7E76D1DD24CFBF5D00F4D7E3 /* Decoder+extension.swift */,
+				7E76D1DD24CFBF5D00F4D7E3 /* Decoder+Extension.swift */,
 				7E76D1F224CFCB9500F4D7E3 /* String+Extentions.swift */,
+				6D1017C224F0C170006D380B /* UIView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -597,9 +606,10 @@
 				7E9A2CA524D25D0700AA8A4B /* RepositoryInfoCellViewModel.swift in Sources */,
 				7E76D1F324CFCB9500F4D7E3 /* String+Extentions.swift in Sources */,
 				7E40921424C96A2C0006549E /* ListViewController.swift in Sources */,
-				6D4E02E224EE990100BFB2F2 /* DContentCellNode.swift in Sources */,
+				6D4E02E224EE990100BFB2F2 /* DCellNode.swift in Sources */,
 				7E76D1EC24CFC87600F4D7E3 /* RxSectionCollectionViewModel.swift in Sources */,
 				7E76D1D724CFBE5E00F4D7E3 /* Network.swift in Sources */,
+				6D1017C124F0C0B1006D380B /* DStickyHeaderNode.swift in Sources */,
 				7E473EA724CFFDD300F8637E /* PartnerModel.swift in Sources */,
 				7E9A2CB224D28F2F00AA8A4B /* ExCellNode.swift in Sources */,
 				7E76D1ED24CFC87600F4D7E3 /* RxSectionTableViewModel.swift in Sources */,
@@ -607,15 +617,17 @@
 				7E9A2CA724D2601C00AA8A4B /* RepositoryPartnerViewController.swift in Sources */,
 				7E40921224C957690006549E /* MainViewController.swift in Sources */,
 				7E76D1E024CFBFD300F4D7E3 /* RepositoryListCellNode.swift in Sources */,
-				7E76D1DE24CFBF5D00F4D7E3 /* Decoder+extension.swift in Sources */,
+				7E76D1DE24CFBF5D00F4D7E3 /* Decoder+Extension.swift in Sources */,
 				7E76D1EE24CFC87600F4D7E3 /* RxViewModel.swift in Sources */,
-				6D4E02E424EE9A1700BFB2F2 /* DTitleNode.swift in Sources */,
+				6D4E02E424EE9A1700BFB2F2 /* DContentsNode.swift in Sources */,
+				6D1017C324F0C170006D380B /* UIView+Extension.swift in Sources */,
 				7E150C7F24C94AF100510C80 /* ViewController.swift in Sources */,
 				7E76D1EB24CFC87600F4D7E3 /* RxCollectionViewCell.swift in Sources */,
 				7E76D1CB24CFB98400F4D7E3 /* RepositoryViewController.swift in Sources */,
 				7E150C7B24C94AF100510C80 /* AppDelegate.swift in Sources */,
 				7E76D1DA24CFBE9F00F4D7E3 /* UserModel.swift in Sources */,
 				7E76D1EF24CFC87600F4D7E3 /* RxTableViewCell.swift in Sources */,
+				6D1017BF24F0BAD1006D380B /* DContentsViewModel.swift in Sources */,
 				7E76D1E924CFC87600F4D7E3 /* RxViewController.swift in Sources */,
 				7E76D1D624CFBE5E00F4D7E3 /* RepoService.swift in Sources */,
 			);

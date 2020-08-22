@@ -4,34 +4,31 @@ import RxSwift
 import RxCocoa
 import TextureSwiftSupport
 
-struct DContentData {
+struct DCellData {
 }
 
-class DContentCellNode: ASCellNode {
-    typealias Node = DContentCellNode
-    
-    struct Attribute {
-        static let placeHolderColor: UIColor = UIColor.gray.withAlphaComponent(0.2)
-    }
-    
-    private var nodes = [ASDisplayNode]()
+class DCellNode: ASCellNode {
+    typealias Node = DCellNode
+    private lazy var nodes = { () -> [DContentsNode] in
+        var results = [DContentsNode]()
+        for i in 0..<5 {
+            let node = DContentsNode(viewModel: DContentsViewModel(dependency: DContentsViewModel.Dependency(service: GithubService(), index: i)))
+            results.append(node)
+        }
+        return results
+    }()
 
     let disposeBag = DisposeBag()
     let id: Int
-    let data: DContentData
+    let data: DCellData
     
-    init(data: DContentData) {
+    init(data: DCellData) {
         self.id = 1
         self.data = data
         super.init()
         self.selectionStyle = .none
         self.backgroundColor = .white
         self.automaticallyManagesSubnodes = true
-        
-        self.nodes.append(DTitleNode())
-        self.nodes.append(DTitleNode())
-        self.nodes.append(DTitleNode())
-        self.nodes.append(DTitleNode())
     }
     
     override func layout() {
@@ -40,7 +37,7 @@ class DContentCellNode: ASCellNode {
     }
 }
 
-extension DContentCellNode {
+extension DCellNode {
     // layout spec
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         return LayoutSpec {

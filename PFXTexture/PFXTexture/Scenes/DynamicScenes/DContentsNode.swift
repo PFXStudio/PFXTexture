@@ -2,11 +2,12 @@ import Foundation
 import TextureSwiftSupport
 import RxSwift
 
-class DTitleNode: ASDisplayNode {
+class DContentsNode: ASDisplayNode {
+    private var viewModel: DContentsViewModel!
     private let disposeBag = DisposeBag()
     private lazy var favoriteButtonNode = { () -> ASButtonNode in
         let node = ASButtonNode()
-        node.setAttributedTitle(NSAttributedString(string: "removeAll".localized(), attributes: DTitleNode.defaultButtonAttributes), for: .normal)
+        node.setAttributedTitle(NSAttributedString(string: "removeAll".localized(), attributes: DContentsNode.defaultButtonAttributes), for: .normal)
         node.clipsToBounds = true
         node.rx.tap
             .subscribe(onNext: { _ in
@@ -43,85 +44,31 @@ class DTitleNode: ASDisplayNode {
         node.clipsToBounds = true
         let attr = [
                     NSAttributedString.Key.foregroundColor: UIColor.gray]
-        node.setAttributedTitle(NSAttributedString(string: "addItem".localized(), attributes: attr), for: .normal)
+        node.setAttributedTitle(NSAttributedString(string: "refresh".localized(), attributes: attr), for: .normal)
         node.rx.tap
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
-                self.itemCellNodes.append(DTitleNode.Cell(itemInfo: ExData(title: String.random(length: 10), desc: String.random(length: 16), imagePath: "")))
-                self.collectionNode.reloadData()
+                self.itemCellNodes.removeAll()
                 self.setNeedsLayout()
+                self.viewModel.input.load.onNext(())
             })
             .disposed(by: self.disposeBag)
 
         return node
     }()
     // filter buttons
-    private lazy var studioButtonNode = { () -> ASButtonNode in
-        let node = ASButtonNode()
-        node.clipsToBounds = true
-        node.rx.tap
-            .subscribe(onNext: { _ in
-                print("\(#function) : \(#line)")
-            })
-            .disposed(by: self.disposeBag)
-        return node
-    }()
-    private lazy var dressButtonNode = { () -> ASButtonNode in
-        let node = ASButtonNode()
-        node.clipsToBounds = true
-        node.rx.tap
-            .subscribe(onNext: { _ in
-                print("\(#function) : \(#line)")
-            })
-            .disposed(by: self.disposeBag)
-        return node
-    }()
-    private lazy var makeupButtonNode = { () -> ASButtonNode in
-        let node = ASButtonNode()
-        node.clipsToBounds = true
-        node.rx.tap
-            .subscribe(onNext: { _ in
-                print("\(#function) : \(#line)")
-            })
-            .disposed(by: self.disposeBag)
-        return node
-    }()
-    private lazy var snapButtonNode = { () -> ASButtonNode in
-        let node = ASButtonNode()
-        node.clipsToBounds = true
-        node.rx.tap
-            .subscribe(onNext: { _ in
-                print("\(#function) : \(#line)")
-            })
-            .disposed(by: self.disposeBag)
-        return node
-    }()
-
-    private var toggleNode = { () -> ASDisplayNode in
-        let node = ASDisplayNode()
-        node.clipsToBounds = true
-        return node
-    }()
-    
     private var emptyNode = { () -> ASTextNode in
         let node = ASTextNode()
         node.clipsToBounds = true
         node.maximumNumberOfLines = 0
-        
-        let style = NSMutableParagraphStyle()
-        style.alignment = .center
-        let attributedString = NSMutableAttributedString(string: "emptyFavoriteSee".localized(), attributes: [
-            .foregroundColor: UIColor.gray,
-            .kern: 0.0,
-            .paragraphStyle : style
-        ])
-        attributedString.addAttribute(.foregroundColor, value: UIColor.gray, range: NSRange(location: 0, length: 13))
-        node.attributedText = attributedString
+        node.attributedText = NSAttributedString(string: "empty".localized())
+        node.borderWidth = 1
+        node.borderColor = UIColor.lightGray.cgColor
         return node
     }()
     
     private lazy var collectionNode = { () -> ASCollectionNode in
-        let node = ASCollectionNode(collectionViewLayout: SRecentLayout(count: 0))
+        let node = ASCollectionNode(collectionViewLayout: DContentsLayout(count: 0))
         node.allowsMultipleSelection = false
         node.showsHorizontalScrollIndicator = false
         node.delegate = self
@@ -129,16 +76,33 @@ class DTitleNode: ASDisplayNode {
         return node
     }()
 
-    private var itemCellNodes = [DTitleNode.Cell]()
+    private var itemCellNodes = [DContentsNode.Cell]()
 
-    override init() {
+    init(viewModel: DContentsViewModel) {
+        self.viewModel = viewModel
         super.init()
-        
         self.buildNodeHierarchy()
         self.bindOutputs()
     }
     
+    override func didLoad() {
+        super.didLoad()
+        self.viewModel.input.load.onNext(())
+    }
     func bindOutputs() {
+        self.viewModel.output
+            .items
+            .subscribe(onNext: { [weak self] responseModels in
+                guard let self = self, let models = responseModels else { return }
+                for model in models {
+                    let cell = DContentsNode.Cell(model: model)
+                    self.itemCellNodes.append(cell)
+                }
+                
+                self.collectionNode.reloadData()
+                self.setNeedsLayout()
+            })
+            .disposed(by: self.disposeBag)
     }
     
     override func asyncTraitCollectionDidChange(withPreviousTraitCollection previousTraitCollection: ASPrimitiveTraitCollection) {
@@ -152,9 +116,6 @@ class DTitleNode: ASDisplayNode {
     // MARK: - Build node hierarchy
     private func buildNodeHierarchy() {
         self.automaticallyManagesSubnodes = true
-        [self.emptyNode, self.collectionNode, self.allButtonNode, self.recentButtonNode, self.favoriteButtonNode].forEach { (node) in
-            self.addSubnode(node)
-        }
     }
     
     // MARK: - Layout
@@ -168,9 +129,9 @@ class DTitleNode: ASDisplayNode {
     override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
         return LayoutSpec {
             VStackLayout(alignItems: .stretch) {
-                HStackLayout(alignItems: .stretch) {
+                HStackLayout(alignItems: .start) {
                     self.favoriteButtonNode.height(44)
-                    InsetLayout(insets: UIEdgeInsets(top: 17, left: 16, bottom: 1, right: 16)) {
+                    InsetLayout(insets: UIEdgeInsets(top: 18, left: 16, bottom: 1, right: 16)) {
                         self.divNode.width(1.0).height(10.0)
                     }
                     self.recentButtonNode.height(44)
@@ -180,10 +141,12 @@ class DTitleNode: ASDisplayNode {
                 }
                 .padding(UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20))
                 if self.itemCellNodes.count > 0 {
-                    self.collectionNode.height(100).padding(0)
+                    self.collectionNode.height(120).padding(0)
                 }
                 else {
-                    self.emptyNode.height(150).padding(.top, 50)
+                    CenterLayout {
+                        self.emptyNode.padding(0).height(80)
+                    }
                 }
             }
             .padding(0)
@@ -191,8 +154,8 @@ class DTitleNode: ASDisplayNode {
     }
 }
 
-extension DTitleNode: ASCollectionDataSource, ASCollectionDelegate {
-    class SRecentLayout: UICollectionViewFlowLayout {
+extension DContentsNode: ASCollectionDataSource, ASCollectionDelegate {
+    class DContentsLayout: UICollectionViewFlowLayout {
 
         // MARK: - Variables
         
@@ -216,10 +179,10 @@ extension DTitleNode: ASCollectionDataSource, ASCollectionDelegate {
         
         override var itemSize: CGSize {
             set {
-                self.itemSize = CGSize(width: 120, height: 200)
+                self.itemSize = CGSize(width: 120, height: 120)
             }
             get {
-                return CGSize(width: 120, height: 200)
+                return CGSize(width: 120, height: 120)
             }
         }
 
@@ -246,49 +209,66 @@ extension DTitleNode: ASCollectionDataSource, ASCollectionDelegate {
     }
 }
 
-extension DTitleNode {
+extension DContentsNode {
     class Cell: ASCellNode {
-        private var itemInfo: ExData!
-        init(itemInfo: ExData) {
+        private var model: RepositoryModel!
+        init(model: RepositoryModel) {
             super.init()
-            self.itemInfo = itemInfo
+            self.model = model
             self.automaticallyManagesSubnodes = true
         }
 
+        private lazy var imageNode = { () -> ASNetworkImageNode in
+            let node = ASNetworkImageNode()
+            guard let url = self.model.user?.profileURL else { return node }
+            node.url = url
+            node.clipsToBounds = true
+            node.contentMode = .scaleAspectFit
+            node.cornerRadius = 8.0
+            return node
+        }()
+        
+
         private lazy var resionNode = { () -> ASTextNode in
             let node = ASTextNode()
+            guard let desc = self.model.desc else { return node }
             node.clipsToBounds = true
             node.maximumNumberOfLines = 1
 
-            let attr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15),
+            let attr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12),
                         NSAttributedString.Key.foregroundColor: UIColor.gray,
             ]
             
-            node.attributedText = NSAttributedString(string: self.itemInfo.desc, attributes: attr)
+            node.attributedText = NSAttributedString(string: desc, attributes: attr)
             return node
         }()
 
         private lazy var nameNode = { () -> ASTextNode in
             let node = ASTextNode()
+            guard let text = self.model.repositoryName else { return node }
             node.clipsToBounds = true
             node.maximumNumberOfLines = 0
 
-            let attr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14),
+            let attr = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10),
                         NSAttributedString.Key.foregroundColor: UIColor.gray,
             ]
             
-            node.attributedText = NSAttributedString(string: self.itemInfo.title, attributes: attr)
+            node.attributedText = NSAttributedString(string: text, attributes: attr)
             return node
         }()
 
         override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
             return LayoutSpec {
                 // HStackLayout에 .flexGrow를 주면 VerticalCenter가 됨
-                VStackLayout(alignItems: .start) {
-                    self.resionNode
-                        .padding(UIEdgeInsets(top: 12, left: 0, bottom: 2, right: 0))
-                    // nameNode에 .flexGrow를 주면 문자열 길이 상관 없이 공백까지 채워 줌.
-                    self.nameNode.flexGrow(1.0)
+                HStackLayout(alignItems: .start) {
+                    self.imageNode.height(50).width(50)
+                    VStackLayout(alignItems: .stretch) {
+                        self.resionNode
+                            .padding(UIEdgeInsets(top: 12, left: 0, bottom: 2, right: 0))
+                        // nameNode에 .flexGrow를 주면 문자열 길이 상관 없이 공백까지 채워 줌.
+                        self.nameNode.flexGrow(1.0)
+                    }
+                    .padding(0.0)
                 }
                 .height(200)
                 .flexGrow(1.0)
@@ -297,7 +277,7 @@ extension DTitleNode {
     }
 }
 
-extension DTitleNode {
+extension DContentsNode {
     static var defaultButtonAttributes = {
         return [NSAttributedString.Key.foregroundColor: UIColor.gray,
                 NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]

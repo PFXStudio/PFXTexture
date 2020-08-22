@@ -22,7 +22,7 @@ class ExCellNode: ASCellNode {
     
     lazy var titleNode = { () -> ASTextNode in
         let node = ASTextNode()
-        node.maximumNumberOfLines = 1
+        node.maximumNumberOfLines = 0
         node.placeholderColor = Attribute.placeHolderColor
         node.rx.tap
             .subscribe(onNext: { [weak self] _ in
@@ -30,7 +30,7 @@ class ExCellNode: ASCellNode {
                 let descNode = ASTextNode()
                 descNode.maximumNumberOfLines = 0
                 descNode.placeholderColor = Attribute.placeHolderColor
-                descNode.attributedText = NSAttributedString(string: String.random(length: 128), attributes: Self.descAttributes)
+                descNode.attributedText = NSAttributedString(string: String.random(length: 32), attributes: Self.descAttributes)
                 self.descNodes.append(descNode)
                 
                 let imageNode = ASNetworkImageNode()

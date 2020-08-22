@@ -13,6 +13,7 @@ class RepositoryViewModel: RxViewModel, RxViewModelProtocol {
     }
     
     struct Dependency {
+        var service: GithubProtocol!
     }
     var input: RepositoryViewModel.Input!
     var output: RepositoryViewModel.Output!
@@ -41,8 +42,7 @@ class RepositoryViewModel: RxViewModel, RxViewModelProtocol {
             .subscribe(onNext: { [weak self] _ in
                 guard let self = self else { return }
                 let since = self.lastId
-                _ = RepoService.loadRepository(params: [.since(since)])
-                    .delay(0.5, scheduler: MainScheduler.asyncInstance)
+                _ = self.dependency.service.loadRepository(params: [.since(since)])
                     .subscribeOn(ConcurrentDispatchQueueScheduler(qos: .default))
                     .map { $0.map { RepositoryCellViewModel(reuseIdentifier: "RepositoryCell", identifier: "RepositoryCell" + String.random(), dependency: RepositoryCellViewModel.Dependency(model: $0)) as RxCellViewModel } }
                     .observeOn(MainScheduler.instance)
