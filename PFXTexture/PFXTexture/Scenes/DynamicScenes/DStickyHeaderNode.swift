@@ -116,8 +116,7 @@ class DStickyHeaderNode: ASCellNode {
         
         return LayoutSpec {
             VStackLayout(justifyContent: .start, alignItems: .stretch) {
-                // justifyContent: .start 속성 줘야 collectionNode 보여짐. 왼쪽부터 차례로 채운 다는 의미.
-                VStackLayout(alignItems: .stretch) {
+                VStackLayout() {
                     OverlayLayout(content: {
                         HStackLayout(alignItems: .stretch) {
                             self.collectionNode.padding(0).height(66).flexGrow(1.0)
