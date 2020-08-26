@@ -1,7 +1,8 @@
 import AsyncDisplayKit
 import RxSwift
+import TextureSwiftSupport
 
-extension DViewController {
+extension DynamicNode {
     class DLayout: UICollectionViewFlowLayout {
         override init() {
             super.init()
@@ -31,9 +32,11 @@ extension DViewController {
     }
 }
 
-class DViewController: ASDKViewController<ASCollectionNode>, ASCollectionDataSource, ASCollectionDelegate, ASCollectionDelegateFlowLayout {
+class DynamicNode: ASDisplayNode, ASCollectionDataSource, ASCollectionDelegate, ASCollectionDelegateFlowLayout {
     private var selectedIndex = 0
-    private var collectionNode: ASCollectionNode {
+    private var stickyHeaderNode: DStickyHeaderNode!
+    private lazy var collectionNode = { () -> ASCollectionNode in
+        let node = ASCollectionNode(collectionViewLayout: DLayout())
         node.allowsMultipleSelection = false
         node.showsHorizontalScrollIndicator = false
         node.showsVerticalScrollIndicator = false
@@ -41,11 +44,15 @@ class DViewController: ASDKViewController<ASCollectionNode>, ASCollectionDataSou
         node.dataSource = self
         node.registerSupplementaryNode(ofKind: UICollectionView.elementKindSectionHeader)
         node.backgroundColor = UIColor.white
-        
         return node
+    }()
+    
+    override func didLoad() {
+        super.didLoad()
+        self.addSubnode(self.collectionNode)
+        self.collectionNode.reloadData()
     }
     
-    private var stickyHeaderNode: DStickyHeaderNode!
     private lazy var sections = { () -> [[ASCellNode]] in
         var results = [[ASCellNode]]()
         var nodes = [ASCellNode]()
@@ -74,51 +81,16 @@ class DViewController: ASDKViewController<ASCollectionNode>, ASCollectionDataSou
         return results
     }()
     
-    override init() {
-        super.init(node: ASCollectionNode(collectionViewLayout: DLayout()))
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    //    init(coordinator: HomeCoordinator) {
-    //        self.coordinator = coordinator
-    //        super.init(node: ASCollectionNode(collectionViewLayout: DLayout()))
-    //    }
-    
-    //    required init?(coder: NSCoder) {
-    //        fatalError("init(coder:) has not been implemented")
-    //    }
-    //
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.collectionNode.reloadData()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidLoad()
-        if #available(iOS 13.0, *) {
-            let sharedApplication = UIApplication.shared
-            let statusBar = UIView(frame: (sharedApplication.delegate?.window??.windowScene?.statusBarManager?.statusBarFrame)!)
-            statusBar.backgroundColor = UIColor.white
-            sharedApplication.delegate?.window??.addSubview(statusBar)
-            
-            //            let statusBar = UIView(frame: UIApplication.shared.keyWindow?.windowScene?.statusBarManager?.statusBarFrame ?? CGRect.zero)
-            //            statusBar.backgroundColor = UIColor.white
-            //            UIApplication.shared.keyWindow?.addSubview(statusBar)
+    override func layoutSpecThatFits(_ constrainedSize: ASSizeRange) -> ASLayoutSpec {
+        return LayoutSpec {
+            InsetLayout(insets: UIEdgeInsets.zero) {
+                VStackLayout(alignItems: .stretch) {
+                    self.collectionNode.padding(0).flexGrow(1.0)
+                }
+                .padding(0)
+            }
         }
-        else {
-            let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView
-            statusBar?.backgroundColor = UIColor.white
-        }
-        
     }
-    
-    //    override func viewDidDisappear(_ animated: Bool) {
-    //        super.viewDidDisappear(animated)
-    //        coordinator?.removeDependency(coordinator)
-    //    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return self.sections.count

@@ -38,6 +38,7 @@ target 'PFXTexture' do
 
     # Swift Lint
     pod 'SwiftLint'
+    pod 'SnapKit'
 
   # Pods for PFXTexture
 

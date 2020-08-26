@@ -15,9 +15,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     @IBAction func touchedStartButton(_ sender: Any) {
-        let controller = DViewController()
-        controller.modalPresentationStyle = .fullScreen
-        self.present(controller, animated: false, completion: nil)
+        guard let destination = UIStoryboard(name: "DynamicScene", bundle: nil).instantiateViewController(withIdentifier: String(describing: DynamicSceneViewController.self)) as? DynamicSceneViewController else { return }
+        destination.modalPresentationStyle = .fullScreen
+        self.present(destination, animated: true, completion: nil)
     }
 }
 
